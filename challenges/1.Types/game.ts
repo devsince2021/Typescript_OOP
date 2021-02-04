@@ -23,16 +23,18 @@
     switch (direction) {
       case 'up':
         position.y++;
-        return;
+        break;
       case 'down':
         position.y--;
-        return;
+        break;
       case 'left':
         position.x--;
-        return;
+        break;
       case 'right':
         position.x++;
-        return;
+        break;
+      default:
+        throw new Error(`unknown direction: ${direction}`);
     }
   }
 
