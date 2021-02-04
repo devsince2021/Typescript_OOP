@@ -3,8 +3,9 @@
  */
 
 {
-  const calculate = (operation: string, para1: number, para2: number): number => {
-    switch (operation) {
+  type Command = 'add' | 'substract' | 'multiply' | 'divide' | 'remainder';
+  const calculate = (command: Command, para1: number, para2: number): number => {
+    switch (command) {
       case 'add':
         return para1 + para2;
       case 'substract':
@@ -15,6 +16,8 @@
         return para1 / para2;
       case 'remainder':
         return para1 % para2;
+      default:
+        throw new Error('unknown command');
     }
   };
 
