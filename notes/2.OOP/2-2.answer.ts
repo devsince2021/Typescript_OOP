@@ -1,14 +1,14 @@
 {
-  type CoffeeCup = {
-    shots: number;
-    hasMilk: boolean;
-  };
-
   /**
    * 클래스를 만든다는 것은..
    * 1. 관련 있는 데이터와 함수들을 한 곳으로 묶는 것
    * 2. obj를 찍어낼 수 있는 템플릿을 만들어내는 것
    */
+
+  type CoffeeCup = {
+    shots: number;
+    hasMilk: boolean;
+  };
 
    /**
    * 클래스 용법

@@ -5,9 +5,8 @@
   };
 
   class CoffeeMachine {
-    coffeeBeanGram: number;
-
-    static BEANS_GRAM_PER_SHOT: number = 10;
+    private coffeeBeanGram: number;
+    private static BEANS_GRAM_PER_SHOT: number = 10;
 
     constructor(gram: number) {
       this.coffeeBeanGram = gram;
@@ -27,10 +26,6 @@
     }
   };
 
-  const firstCoffeeMachine = new CoffeeMachine(100);
-  console.log(firstCoffeeMachine, 'fcm')
-  console.log(firstCoffeeMachine.coffeeBeanGram, '1');
-  const coffeeByFCM = firstCoffeeMachine.makeCoffee(2);
-  console.log(coffeeByFCM);
-  console.log(firstCoffeeMachine.coffeeBeanGram, '2');
+  const maker = new CoffeeMachine(11)
+  maker.makeCoffee(1)
 }
