@@ -5,6 +5,7 @@
   };
 
   /**
+   * 접근 제어자
    * public - 별도 설정 없으면 기본으로 public
    * private
    * protected - instance에서는 접근 가능 / 외부에서는 불가능
