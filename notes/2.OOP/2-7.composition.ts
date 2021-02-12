@@ -1,5 +1,4 @@
 {
-
   /**
    * 상속의 문제점
    * 상속의 깊이가 깊어질 수록 복잡도가 증가한다. 족보가 꼬인다.
@@ -79,9 +78,17 @@
       return this.extract(shots);
     }
   }
+  
+  interface MilkFrother {
+    makeMilk(cup: CoffeeCup): CoffeeCup;
+  }
+
+  interface SugarProvider {
+    addSugar(cup: CoffeeCup): CoffeeCup;
+  }
 
   // 싸구려 우유 거품기
-  class CheapMilkSteamer {
+  class CheapMilkSteamer implements MilkFrother {
     private steamMilk() {
       console.log('Steaming some milk...');
     }
@@ -95,9 +102,52 @@
     }
   }
 
-  class AutomaticSugarMixer {
+  class FancyMilkSteamer implements MilkFrother {
+    private steamMilk() {
+      console.log('fancy Steaming some milk...');
+    }
+
+    makeMilk(cup: CoffeeCup): CoffeeCup {
+      this.steamMilk();
+      return {
+        ...cup,
+        hasMilk: true,
+      }
+    }
+  }
+
+  class ColdMilkSteamer implements MilkFrother {
+    private steamMilk() {
+      console.log('Cold Steaming some milk...');
+    }
+
+    makeMilk(cup: CoffeeCup): CoffeeCup {
+      this.steamMilk();
+      return {
+        ...cup,
+        hasMilk: true,
+      }
+    }
+  }
+
+  class SugarMixer implements SugarProvider {
     private getSugar(): boolean {
       console.log('Getting sugar from jar');
+      return true;
+    }
+
+    addSugar(cup: CoffeeCup): CoffeeCup {
+      const sugar = this.getSugar();
+      return {
+        ...cup,
+        hasSugar: sugar,
+      };
+    }
+  }
+
+  class CandySugarMixer implements SugarProvider {
+    private getSugar(): boolean {
+      console.log('Getting sugar from candy');
       return true;
     }
 
@@ -114,7 +164,7 @@
     constructor(
       coffeeBeans: number,
       public readonly serialNumber: string,
-      private milkFrother: CheapMilkSteamer
+      private milkFrother: MilkFrother
     ) {
       super(coffeeBeans);
     }
@@ -127,7 +177,7 @@
   }
 
   class SweetCoffeeMaker extends CoffeeMachine {
-    constructor(private beans: number, private sugar: AutomaticSugarMixer) {
+    constructor(private beans: number, private sugar: SugarProvider) {
       super(beans);
     }
 
@@ -140,8 +190,8 @@
   class SweetCaffeLatteMachine extends CoffeeMachine {
     constructor(
       private beans: number,
-      private milkFrother: CheapMilkSteamer,
-      private sugar: AutomaticSugarMixer,
+      private milkFrother: MilkFrother,
+      private sugar: SugarProvider,
     ) {
       super(beans);
     }
@@ -152,4 +202,26 @@
       return this.milkFrother.makeMilk(sugarAdded);
     }
   }
+
+  // Milk
+  const cheapMilkSteamer = new CheapMilkSteamer();
+  const fancyMilkSteamer = new FancyMilkSteamer();
+  const coldMilkSteamer = new ColdMilkSteamer();
+
+  // Sugar
+  const candySugar = new CandySugarMixer();
+  const sugar = new SugarMixer();
+
+  // composition
+  const sweetCandyMachine = new SweetCoffeeMaker(12, candySugar);
+  const sweetMachine = new SweetCoffeeMaker(12, sugar);
+
+  const latteMachine = new CaffeLatteMachine(12, 'ss', cheapMilkSteamer);
+  const coldLatteMachine = new CaffeLatteMachine(12, 'ss', coldMilkSteamer);
+  const sweetCaffeLatteMachine = new SweetCaffeLatteMachine(
+    12,
+    cheapMilkSteamer,
+    candySugar
+  );
+
 }
