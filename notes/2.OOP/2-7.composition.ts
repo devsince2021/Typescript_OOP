@@ -190,6 +190,7 @@
   const sweetMachine = new CoffeeMachine(12, noMilk, sugar);
 
   const latteMachine = new CoffeeMachine(12, cheapMilkSteamer, noSugar);
+  console.log(latteMachine)
   const coldLatteMachine = new CoffeeMachine(12, coldMilkSteamer, noSugar);
   const sweetCaffeLatteMachine = new CoffeeMachine(
     12,
