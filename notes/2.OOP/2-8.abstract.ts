@@ -1,5 +1,4 @@
 {
-
   type CoffeeCup = {
     shots: number;
     hasMilk?: boolean;
