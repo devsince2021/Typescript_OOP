@@ -3,13 +3,17 @@ interface StackClass {
   pop(): void;
 }
 
-class Stack implements StackClass {
+export default class Stack implements StackClass {
   private data: string | null;
   private next: Stack | null;
 
   constructor() {
     this.data = null;
     this.next = null;
+  }
+
+  get log(): string | null {
+    return this.data;
   }
 
   push(string: string) {
