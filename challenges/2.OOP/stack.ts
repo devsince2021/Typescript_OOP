@@ -1,6 +1,7 @@
 interface StackClass {
+  // readonly size: number;
   push(string: string): void;
-  pop(): void;
+  pop(): string | null;
 }
 
 export default class Stack implements StackClass {
