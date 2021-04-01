@@ -5,6 +5,7 @@
     * interface를 통해서 추상화, 타입 제한 가능
     * 하나의 클래스로 다르게 작동하는 여러개의 인스턴스를 만들 수 있음.
    */
+  
   type CoffeeCup = {
     shots: number;
     hasMilk: boolean;

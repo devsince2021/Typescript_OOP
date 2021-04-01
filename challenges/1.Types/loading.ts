@@ -27,13 +27,13 @@ export type ResourceLoadState = LoadingState | SuccessState | FailState;
 
 export const printLoginState = (loadState: ResourceLoadState) => {
   if (loadState.state === 'loading') {
-    console.log(`👀 ${loadState.state}...`);
+    // console.log(`👀 ${loadState.state}...`);
     return 'loading';
   } else if (loadState.state === 'success') {
-    console.log(`😃 ${loadState.response.body}`);
+    // console.log(`😃 ${loadState.response.body}`);
     return 'success';
   } else {
-    console.log(`😱 ${loadState.reason}`);
+    // console.log(`😱 ${loadState.reason}`);
     return 'fail';
   }
 }
