@@ -1,42 +1,41 @@
 interface Employee {
-  pay(): void;
+  pay: () => void;
 };
 
 class FulltimeEmployee implements Employee {
   pay() {
-    console.log(`fulltime`);
+    console.log('fulltime');
   }
 
-  workFullTime() {
-
+  workFulltime() {
+    console.log('workFulltime 2nd func');
   }
 }
 
 class PartTimeEmployee implements Employee {
   pay() {
-    console.log(`part time`);
+    console.log('part-time');
   }
 
   workPartTime() {
-
+    console.log('workParTime 2nd func');
   }
 }
 
-//세부적인 타입을 인자로 받아서 정말 추상적인 타입으로 다시 리턴하는 함수는 똥!
-function payBad(employee: Employee): Employee {
+
+const payBad = (employee: Employee): Employee => {
   employee.pay();
   return employee;
 };
 
-function pay<T extends Employee>(employee: T): T {
+const pay = <T extends Employee>(employee: T): T => {
   employee.pay();
   return employee;
 }
 
 const ellie = new FulltimeEmployee();
 const bob = new PartTimeEmployee();
-ellie.workFullTime();
-bob.workPartTime();
+ellie.workFulltime();
 
 const ellieAfterPay = pay(ellie);
 const bobAfterPay = pay(bob);
@@ -47,9 +46,15 @@ const obj = {
 };
 
 const obj2 = {
-  animal: '🦨',
+  animal: 'dog'
 };
 
-const getValues = <T, K extends keyof T>(obj: T, key: K): T[K] => {
+// getValue(obj, 'name'); // ellie
+
+const getValue = <T, K extends keyof T>(obj, key): T[K] => {
   return obj[key];
 };
+
+// const getValue = (obj: T, key: K): V => {
+
+// };
